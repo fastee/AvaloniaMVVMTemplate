@@ -6,7 +6,11 @@
         xmlns:views="clr-namespace:AvaloniaMVVMTemplate.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvaloniaMVVMTemplate.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Height="{Binding WindowHeight,Mode=TwoWay}"
+        Width="{Binding WindowWidth,Mode=TwoWay}"
+        WindowState="{Binding WindowState}"
         Icon="/Assets/avalonia-logo.ico"
         Title="AvaloniaMVVMTemplate">
-        <views:MainView />
+    <views:MainView />
 </Window>

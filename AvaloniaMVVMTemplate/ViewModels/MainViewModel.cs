@@ -12,13 +12,12 @@ public partial class MainViewModel : ViewModelBase
     private readonly ILogger<MainViewModel> _logger;
 
 
+    public static int WindowWidth { get; set; }
+    public static int WindowHeight { get; set; }
 
-    public int WindowWidth { get; set; }
-    public int WindowHeight { get; set; }
+    private static WindowState _windowState;
 
-    private WindowState _windowState;
-
-    public WindowState WindowState
+    public static WindowState WindowState
     {
         get => _windowState;
         set
@@ -32,23 +31,29 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    public MainViewModel(ILogger<MainViewModel> logger)
+    static MainViewModel()
     {
-        _logger = logger;
-
-
         WindowWidth = AppSetting.Default.MainWindowWidth;
         WindowHeight = AppSetting.Default.MainWindowHeight;
         _windowState = (WindowState)AppSetting.Default.MainWindowState;
     }
 
-    [ObservableProperty, NotifyPropertyChangedFor(nameof(Progress), nameof(ProgressState))]
+    public MainViewModel(ILogger<MainViewModel> logger)
+    {
+        _logger = logger;
+
+
+    }
+
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(Progress), nameof(ProgressState), nameof(ProgressVisible))]
     private int currentStep;
-    [ObservableProperty, NotifyPropertyChangedFor(nameof(Progress), nameof(ProgressState))]
+
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(Progress), nameof(ProgressState), nameof(ProgressVisible))]
     private int totalStep;
 
     public double Progress => 100 * (double)CurrentStep / (double)TotalStep;
     public string ProgressState => TestCommand.IsRunning ? "正在执行" : "";
+    public bool ProgressVisible => CurrentStep > 0;
 
     [RelayCommand]
     private async Task Test()
@@ -58,7 +63,7 @@ public partial class MainViewModel : ViewModelBase
         for (int i = 0; i < 10; i++)
         {
             CurrentStep++;
-            await Task.Delay(3000);
-        }        
+            await Task.Delay(1000);
+        }
     }
 }

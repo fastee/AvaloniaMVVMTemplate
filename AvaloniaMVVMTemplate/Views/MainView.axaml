@@ -12,5 +12,9 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-  
+  <Grid RowDefinitions="*,*,*" HorizontalAlignment="Center">
+      <Button Command="{Binding TestCommand}" Content="按钮1"></Button>
+      <ProgressBar Grid.Row="1" Value="{Binding Progress}" IsVisible="{Binding ProgressVisible}"></ProgressBar>
+      <TextBlock Grid.Row="2" Text="{Binding ProgressState}" IsVisible="{Binding ProgressVisible}"></TextBlock>
+  </Grid>
 </UserControl>
