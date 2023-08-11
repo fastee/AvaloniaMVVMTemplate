@@ -11,14 +11,6 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
-  
-  <ItemGroup>
-    <AvaloniaXaml Remove="AvaloniaMVVMTemplate.Desktop\**" />
-    <Compile Remove="AvaloniaMVVMTemplate.Desktop\**" />
-    <EmbeddedResource Remove="AvaloniaMVVMTemplate.Desktop\**" />
-    <None Remove="AvaloniaMVVMTemplate.Desktop\**" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
